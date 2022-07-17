@@ -1,0 +1,8 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+echo "[Checking format]"
+npx lint-staged
+npx prettier --write ./src && git add -A ./src
+echo "[Checking build]"
+npm run build

@@ -1,0 +1,27 @@
+version: '3.4'
+
+services:
+  app:
+    image: project-backend:v1
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '8080:8080'
+    restart: unless-stopped
+    depends_on:
+      - redis
+      - db
+  db:
+    image: mongo
+    volumes:
+      - .docker/data/db:/data/db
+    restart: unless-stopped
+    ports:
+      - '27017:27017'
+
+  redis:
+    image: redis:5-alpine
+    volumes:
+      - .docker/data/redis:/data
+    restart: unless-stopped

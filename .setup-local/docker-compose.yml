@@ -1,0 +1,17 @@
+version: '3.3'
+services:
+  mongo-database:
+    container_name: mongodb-database
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root-user
+      - MONGO_INITDB_ROOT_PASSWORD=123456
+    image: mongodb-database
+    ports:
+      - '27017:27017'
+    volumes:
+      - .docker/db:/data/db
+      - .docker/configdb:/data/configdb
+      - .docker/backup:/data/backup
