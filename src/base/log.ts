@@ -1,6 +1,7 @@
-const fs = require('fs');
-const path = require('path');
-const winston = require('winston');
+import fs from 'fs';
+import path from 'path';
+import winston from 'winston';
+
 const format = winston.format;
 const { timestamp, prettyPrint } = format;
 
@@ -25,24 +26,4 @@ export const notifyLogChannel = winston.createLogger({
   level: 'info',
   format: format.combine(format.splat(), format.simple(), timestamp(), prettyPrint()),
   transports: [new winston.transports.File({ filename: folderName + '/notification.log' })],
-});
-
-export const ghtkLogChannel = winston.createLogger({
-  level: 'info',
-  format: format.combine(format.splat(), format.simple(), timestamp(), prettyPrint()),
-  transports: [
-    new winston.transports.File({
-      filename: folderName + '/giaohangtietkiem.log',
-    }),
-  ],
-});
-
-export const updateOrderLogChannel = winston.createLogger({
-  level: 'info',
-  format: format.combine(format.splat(), format.simple(), timestamp(), prettyPrint()),
-  transports: [
-    new winston.transports.File({
-      filename: folderName + '/order-ordershipping.log',
-    }),
-  ],
 });

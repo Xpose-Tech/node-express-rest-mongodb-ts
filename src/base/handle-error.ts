@@ -1,5 +1,6 @@
+import { Request, Response } from 'express';
 import responseCode from './response-code';
-import { error_response_obj } from './injector';
+import { errorResponseObj } from './injector';
 
 /**
  * Handle un-catch exception
@@ -8,6 +9,6 @@ import { error_response_obj } from './injector';
  * @param {*} res
  * @param {*} next
  */
-export const handleError = (err, req, res) => {
-  return res.status(err.status || 500).json(error_response_obj(err.message, responseCode.SERVER.name));
+export const handleError = (err, req: Request, res: Response) => {
+  return res.status(err.status || 500).json(errorResponseObj(err.message, responseCode.SERVER.name));
 };

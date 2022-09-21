@@ -6,5 +6,3 @@ export * from './handle-error';
 export * from './injector';
 export * from './log';
 export * from './response-code';
-export * from './variable';
-export * from './variable';
