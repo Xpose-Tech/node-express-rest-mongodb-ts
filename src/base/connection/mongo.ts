@@ -1,8 +1,8 @@
 import mongoose from 'mongoose';
-import { ENV } from '@config/index';
+import { env } from '@config/index';
 export const connectMongoDb = () => {
   const connect = () => {
-    const mongoUrl = ENV.mongoDbUrl;
+    const mongoUrl = env.mongoDbUrl;
     mongoose.Promise = global.Promise;
     mongoose.connect(
       mongoUrl,

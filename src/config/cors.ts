@@ -1,27 +1,30 @@
+import { Request } from 'express';
+
 import { config } from 'dotenv';
-import { ENV } from './env';
+import { env } from './env';
+import { ENV } from '@constants/env.constant';
 config();
 
 let allowList: any;
 switch (process.env.NODE_ENV) {
-  case 'development':
-    allowList = ENV.whitelist;
+  case ENV.DEVELOPMENT:
+    allowList = env.whitelist;
     break;
-  case 'staging':
-    allowList = ENV.whitelist;
+  case ENV.STAGING:
+    allowList = env.whitelist;
     break;
-  case 'production':
-    allowList = ENV.whitelist;
+  case ENV.PRODUCTION:
+    allowList = env.whitelist;
     break;
   case 'test':
-    allowList = ENV.whitelist;
+    allowList = env.whitelist;
     break;
   default:
     allowList = '*';
     break;
 }
 
-export const corsOptions = function (req, callback) {
+export const corsOptions = function (req: Request, callback) {
   let corsOptions;
   if ((typeof allowList == 'string' && allowList == '*') || allowList.indexOf(req.header('Origin')) !== -1) {
     corsOptions = { origin: true }; // reflect (enable) the requested origin in the CORS response

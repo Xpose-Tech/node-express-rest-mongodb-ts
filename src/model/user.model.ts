@@ -1,9 +1,9 @@
 import mongoose from 'mongoose';
-import { E_VERIFY_TYPE } from '@base/variable';
+import paginate from 'mongoose-paginate-v2';
+import aggregatePaginate from 'mongoose-aggregate-paginate-v2';
+
 import { databaseValidate } from '@utils/database-validate';
-import { UserInterface } from './docs/user.doc';
-const paginate = require('./plugins/paginate');
-const aggregatePaginate = require('./plugins/aggregate.paginate');
+import { UserDoc } from './docs/user.doc';
 
 const AddressSchema = new mongoose.Schema(
   {
@@ -45,10 +45,6 @@ const VerifyUserSchema = new mongoose.Schema(
     type: {
       type: String,
       required: [true, databaseValidate('missing', 'verify_information.type', 'User')],
-      enum: {
-        values: E_VERIFY_TYPE,
-        message: databaseValidate('invalid', 'verify_information.type', 'User'),
-      },
     },
     code: {
       type: Number,
@@ -112,5 +108,5 @@ const UserSchema = new mongoose.Schema(
 UserSchema.plugin(paginate);
 UserSchema.plugin(aggregatePaginate);
 
-const UserModel = mongoose.model<UserInterface>('User', UserSchema);
+const UserModel = mongoose.model<UserDoc>('User', UserSchema);
 export default UserModel;

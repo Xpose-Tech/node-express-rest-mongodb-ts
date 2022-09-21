@@ -1,12 +1,14 @@
+import path from 'path';
+import cors from 'cors';
+import express from 'express';
 import bodyParser from 'body-parser';
 import { config } from 'dotenv';
-import express from 'express';
 import morganBody from 'morgan-body';
-import path from 'path';
-import { connectMongoDb, handleError, inteceptor, logsConfig } from './src/base';
-import { corsOptions } from './src/config';
-import rootRoute from './src/routes/index';
-import cors from 'cors';
+
+import { connectMongoDb, handleError, inteceptor, logsConfig } from '@base/index';
+import { corsOptions } from '@config/cors';
+import rootRoute from '@routes/index';
+import eventEmmitter from '@services/event-emitters/execute';
 
 const app = express();
 
@@ -39,3 +41,5 @@ import http from 'http';
 const httpServer = http.createServer();
 
 httpServer.listen(SOCKET_PORT, () => console.log(`* ### Socket Server start at port: ${SOCKET_PORT} *`));
+
+eventEmmitter();

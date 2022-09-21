@@ -76,7 +76,9 @@
       "@model/*": ["model/*"],
       "@repositories/*": ["repositories/*"],
       "@routes/*": ["routes/*"],
-      "@utils/*": ["utils/*"]
+      "@utils/*": ["utils/*"],
+      "@constants/*": ["constants/*"],
+      "@services/*": ["services/*"]
     }
   },
   "include": ["src/**/*", "index.ts"]
